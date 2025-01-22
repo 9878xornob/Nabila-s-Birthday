@@ -1,20 +1,21 @@
-/* styles.css */
-
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #fff8e1, #ffecb3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     overflow: hidden;
 }
 
 .background {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
 }
 
 .slide {
@@ -26,8 +27,6 @@ body {
     width: 100%;
     height: 100%;
     text-align: center;
-    opacity: 1;
-    animation: fadeIn 1s ease;
 }
 
 .hidden {
@@ -54,46 +53,4 @@ button {
 
 button:hover {
     background: #ff3b2f;
-}
-
-.floating-particles {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to top, #ffecd2, #ffafbd);
-    z-index: -1;
-    overflow: hidden;
-}
-
-.cake {
-    width: 200px;
-    height: 200px;
-    background: #f5a623;
-    border-radius: 10px;
-    position: relative;
-    margin: 20px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    transition: transform 1s;
-}
-
-.cake button {
-    margin-top: 20px;
-}
-
-.split-cake {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
 }

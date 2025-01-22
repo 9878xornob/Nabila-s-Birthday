@@ -1,68 +1,69 @@
-// script.js
-const canvas = document.getElementById('balloonsCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// Select elements
+const messageBox = document.getElementById("messageBox");
+const buttons = document.getElementById("buttons");
+const balloonsCanvas = document.getElementById("balloonsCanvas");
+const ctx = balloonsCanvas.getContext("2d");
 
-const hearts = [];
+// Adjust canvas size to the full window
+function resizeCanvas() {
+    balloonsCanvas.width = window.innerWidth;
+    balloonsCanvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
 
-// Heart Object
-class Heart {
-    constructor(x, y, size, color, speed) {
-        this.x = x;
-        this.y = y;
-        this.size = size;
-        this.color = color;
-        this.speed = speed;
-    }
+// Balloons data
+const balloons = [];
+const colors = ["#FF6F61", "#6B5B95", "#88B04B", "#F7CAC9", "#92A8D1", "#F4E04D"];
 
-    draw() {
+function createBalloon() {
+    return {
+        x: Math.random() * balloonsCanvas.width,
+        y: balloonsCanvas.height + Math.random() * 100,
+        size: Math.random() * 30 + 20,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        speed: Math.random() * 2 + 1,
+    };
+}
+
+// Add balloons
+for (let i = 0; i < 50; i++) {
+    balloons.push(createBalloon());
+}
+
+// Draw balloons on the canvas
+function drawBalloons() {
+    ctx.clearRect(0, 0, balloonsCanvas.width, balloonsCanvas.height);
+    balloons.forEach((balloon, index) => {
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
+        ctx.arc(balloon.x, balloon.y, balloon.size, 0, Math.PI * 2);
+        ctx.fillStyle = balloon.color;
         ctx.fill();
-    }
+        balloon.y -= balloon.speed;
 
-    update() {
-        this.y -= this.speed;
-        if (this.y + this.size < 0) {
-            this.y = canvas.height + this.size;
+        // Respawn balloon when it goes off-screen
+        if (balloon.y + balloon.size < 0) {
+            balloons[index] = createBalloon();
         }
-    }
-}
-
-// Create multiple hearts
-function createHearts() {
-    for (let i = 0; i < 20; i++) {
-        const size = Math.random() * 5 + 2;
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        const speed = Math.random() * 1 + 0.5;
-        hearts.push(new Heart(x, y, size, '#ff69b4', speed));
-    }
-}
-
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    hearts.forEach((heart) => {
-        heart.draw();
-        heart.update();
     });
-    requestAnimationFrame(animate);
+    requestAnimationFrame(drawBalloons);
 }
+drawBalloons();
 
-createHearts();
-animate();
-
-// Button Logic
+// Function when "Yes!" button is clicked
 function yesClicked() {
-    const messageBox = document.getElementById('messageBox');
-    const buttons = document.getElementById('buttons');
-    messageBox.innerHTML = `<p>Happy Birthday, Nabila! 🎉</p>`;
-    buttons.style.display = 'none';
+    messageBox.innerHTML = `
+        <div class="star">🎉</div>
+        <p class="special-message">Yay! We knew you’d say yes! 🎂✨</p>
+    `;
+    buttons.style.display = "none"; // Hide buttons
 }
 
+// Function when "No" button is clicked
 function noClicked() {
-    const messageBox = document.getElementById('messageBox');
-    messageBox.innerHTML = `<p>Oh no! Let me try again!</p>`;
+    messageBox.innerHTML = `
+        <div class="star">😅</div>
+        <p class="special-message">No? Are you sure? 🥺 Well, we still love you! ❤️</p>
+    `;
+    buttons.style.display = "none"; // Hide buttons
 }

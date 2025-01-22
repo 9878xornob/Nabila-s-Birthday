@@ -20,8 +20,13 @@
 
         <div class="slide hidden" id="slide3">
             <p>Do you want to see what I made?</p>
-            <button onclick="showSlide('slide6')" id="yesButton">Yes!</button>
+            <button onclick="yesClicked()" id="yesButton">Yes!</button>
             <button onclick="showSlide('slideNo')" id="noButton">No</button>
+        </div>
+
+        <div class="slide hidden" id="slideYes">
+            <p>Yay! I'm so glad you're excited, Nabila! 🎉</p>
+            <button onclick="showSlide('slide6')">Next</button>
         </div>
 
         <div class="slide hidden" id="slideNo">

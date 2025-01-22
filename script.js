@@ -1,32 +1,52 @@
-// Event listeners for the buttons
-function yesClicked() {
-    const messageBox = document.getElementById("messageBox");
-    messageBox.innerHTML = `
-        <div class="star">🌟</div>
-        <p id="message">Yay! I'm so glad you're excited, Nabila! 🎉</p>
-    `;
-    removeButtons();
-    releaseBalloons();
+// script.js
+
+let currentSlide = 1;
+
+// Show a specific slide
+function showSlide(slideId) {
+    document.querySelectorAll('.slide').forEach(slide => {
+        slide.classList.add('hidden');
+    });
+    document.getElementById(slideId).classList.remove('hidden');
 }
 
-function noClicked() {
-    const messageBox = document.getElementById("messageBox");
-    messageBox.innerHTML = `
-        <div class="star">💔</div>
-        <p id="message">Oh no! But it's still your special day, Nabila! 🥳</p>
-    `;
-    removeButtons();
-    releaseBalloons();
+// Slide 6: Floating particles and balloons stuck at the bottom
+function showDecorations() {
+    const canvas = document.getElementById("balloonsBottomCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const balloons = [];
+    const colors = ["#ff6f61", "#6fc3df", "#ffd700", "#98fb98", "#ff69b4"];
+
+    function createBalloon() {
+        const x = Math.random() * canvas.width;
+        const y = canvas.height - 50;
+        const size = Math.random() * 20 + 20;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        balloons.push({ x, y, size, color });
+    }
+
+    function drawBalloons() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let balloon of balloons) {
+            ctx.beginPath();
+            ctx.arc(balloon.x, balloon.y, balloon.size, 0, Math.PI * 2);
+            ctx.fillStyle = balloon.color;
+            ctx.fill();
+        }
+        requestAnimationFrame(drawBalloons);
+    }
+
+    for (let i = 0; i < 10; i++) {
+        createBalloon();
+    }
+    drawBalloons();
 }
 
-// Remove buttons after clicking
-function removeButtons() {
-    const buttons = document.getElementById("buttons");
-    buttons.style.display = "none";
-}
-
-// Balloons animation
-function releaseBalloons() {
+// Slide 7: Balloons released when clicked
+function releaseAllBalloons() {
     const canvas = document.getElementById("balloonsCanvas");
     const ctx = canvas.getContext("2d");
     canvas.width = window.innerWidth;
@@ -46,22 +66,43 @@ function releaseBalloons() {
 
     function updateBalloons() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < balloons.length; i++) {
-            const balloon = balloons[i];
+        for (let balloon of balloons) {
             balloon.y -= balloon.speed;
             ctx.beginPath();
             ctx.arc(balloon.x, balloon.y, balloon.size, 0, Math.PI * 2);
             ctx.fillStyle = balloon.color;
             ctx.fill();
-
-            if (balloon.y + balloon.size < 0) {
-                balloons.splice(i, 1);
-                i--;
-            }
         }
         requestAnimationFrame(updateBalloons);
     }
 
-    setInterval(createBalloon, 300); // Create a new balloon every 300ms
+    for (let i = 0; i < 20; i++) {
+        createBalloon();
+    }
     updateBalloons();
+}
+
+// Slide 8: Splitting the cake
+function splitCake() {
+    const cake = document.getElementById("cake");
+    cake.classList.add("split-cake");
+    cake.innerHTML = `
+        <div style="width: 48%; height: 100%; background: #f5a623; border-radius: 10px;"></div>
+        <div style="width: 48%; height: 100%; background: #f5a623; border-radius: 10px;"></div>
+    `;
+    setTimeout(() => showSlide('slide9'), 2000);
+}
+
+// Slide 9: Final heartfelt message
+function showFinalMessage() {
+    const messageElement = document.getElementById("finalMessage");
+    messageElement.textContent = `
+        Dear Nabila, you are someone who cares deeply and supports me always. 
+        I’m so grateful for you and this small surprise is just a token of my love and appreciation. 💖
+    `;
+}
+
+// Restart the sequence
+function restart() {
+    window.location.reload();
 }

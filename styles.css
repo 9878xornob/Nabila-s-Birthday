@@ -1,80 +1,69 @@
-/* styles.css */
-
-/* General Reset */
-body, html {
+body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #ffafbd, #ffc3a0);
     overflow: hidden;
+    height: 100vh;
 }
 
-/* Background Styles */
 .background {
-    background: linear-gradient(to bottom, #fbc2eb, #a6c1ee);
-    height: 100vh;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
+    flex-direction: column;
 }
 
-/* Message Box */
 .box {
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 15px;
+    background: white;
+    border-radius: 10px;
     padding: 20px;
-    text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-}
-
-.box:hover {
-    transform: scale(1.05);
+    animation: bounce 2s infinite;
 }
 
 .star {
     font-size: 2rem;
-    margin-bottom: 10px;
 }
 
-#message {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Buttons */
 .buttons {
     margin-top: 20px;
 }
 
 button {
-    background: linear-gradient(45deg, #ff6f61, #ff9671);
-    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background: #6fc3df;
     border: none;
     border-radius: 5px;
-    padding: 10px 20px;
-    margin: 5px;
     cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.3s ease, transform 0.3s ease;
+    margin: 0 10px;
+    transition: transform 0.3s;
 }
 
 button:hover {
-    background: linear-gradient(45deg, #ff9671, #ff6f61);
     transform: scale(1.1);
+    background: #5a99bf;
 }
 
-button:active {
-    transform: scale(0.95);
-}
-
-/* Balloons Canvas */
-canvas {
+#balloonsCanvas {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 0;
+    z-index: -1;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(-10px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
 }

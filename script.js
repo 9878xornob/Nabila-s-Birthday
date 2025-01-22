@@ -1,69 +1,70 @@
-// Select elements
-const messageBox = document.getElementById("messageBox");
-const buttons = document.getElementById("buttons");
-const balloonsCanvas = document.getElementById("balloonsCanvas");
-const ctx = balloonsCanvas.getContext("2d");
+// script.js
 
-// Adjust canvas size to the full window
-function resizeCanvas() {
-    balloonsCanvas.width = window.innerWidth;
-    balloonsCanvas.height = window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
-
-// Balloons data
-const balloons = [];
-const colors = ["#FF6F61", "#6B5B95", "#88B04B", "#F7CAC9", "#92A8D1", "#F4E04D"];
-
-function createBalloon() {
-    return {
-        x: Math.random() * balloonsCanvas.width,
-        y: balloonsCanvas.height + Math.random() * 100,
-        size: Math.random() * 30 + 20,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        speed: Math.random() * 2 + 1,
-    };
-}
-
-// Add balloons
-for (let i = 0; i < 50; i++) {
-    balloons.push(createBalloon());
-}
-
-// Draw balloons on the canvas
-function drawBalloons() {
-    ctx.clearRect(0, 0, balloonsCanvas.width, balloonsCanvas.height);
-    balloons.forEach((balloon, index) => {
-        ctx.beginPath();
-        ctx.arc(balloon.x, balloon.y, balloon.size, 0, Math.PI * 2);
-        ctx.fillStyle = balloon.color;
-        ctx.fill();
-        balloon.y -= balloon.speed;
-
-        // Respawn balloon when it goes off-screen
-        if (balloon.y + balloon.size < 0) {
-            balloons[index] = createBalloon();
-        }
-    });
-    requestAnimationFrame(drawBalloons);
-}
-drawBalloons();
-
-// Function when "Yes!" button is clicked
+// Event listeners for the buttons
 function yesClicked() {
+    const messageBox = document.getElementById("messageBox");
     messageBox.innerHTML = `
-        <div class="star">🎉</div>
-        <p class="special-message">Yay! We knew you’d say yes! 🎂✨</p>
+        <div class="star">🌟</div>
+        <p id="message">Yay! I'm so glad you're excited, Nabila! 🎉</p>
     `;
-    buttons.style.display = "none"; // Hide buttons
+    removeButtons();
+    releaseBalloons();
 }
 
-// Function when "No" button is clicked
 function noClicked() {
+    const messageBox = document.getElementById("messageBox");
     messageBox.innerHTML = `
-        <div class="star">😅</div>
-        <p class="special-message">No? Are you sure? 🥺 Well, we still love you! ❤️</p>
+        <div class="star">💔</div>
+        <p id="message">Oh no! But it's still your special day, Nabila! 🥳</p>
     `;
-    buttons.style.display = "none"; // Hide buttons
+    removeButtons();
+    releaseBalloons();
+}
+
+// Remove buttons after clicking
+function removeButtons() {
+    const buttons = document.getElementById("buttons");
+    buttons.style.display = "none";
+}
+
+// Balloons animation
+function releaseBalloons() {
+    const canvas = document.getElementById("balloonsCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const balloons = [];
+    const colors = ["#ff6f61", "#6fc3df", "#ffd700", "#98fb98", "#ff69b4"];
+
+    function createBalloon() {
+        const x = Math.random() * canvas.width;
+        const y = canvas.height + 50;
+        const size = Math.random() * 20 + 20;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const speed = Math.random() * 2 + 1;
+        balloons.push({ x, y, size, color, speed });
+    }
+
+    function updateBalloons() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < balloons.length; i++) {
+            const balloon = balloons[i];
+            balloon.y -= balloon.speed;
+            ctx.beginPath();
+            ctx.arc(balloon.x, balloon.y, balloon.size, 0, Math.PI * 2);
+            ctx.fillStyle = balloon.color;
+            ctx.fill();
+
+            // Remove balloons that move off-screen
+            if (balloon.y + balloon.size < 0) {
+                balloons.splice(i, 1);
+                i--;
+            }
+        }
+        requestAnimationFrame(updateBalloons);
+    }
+
+    setInterval(createBalloon, 300); // Create a new balloon every 300ms
+    updateBalloons();
 }

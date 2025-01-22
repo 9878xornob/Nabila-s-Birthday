@@ -1,3 +1,4 @@
+<!-- HTML File -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,18 +9,50 @@
 </head>
 <body>
     <div class="background">
-        <div class="heart-container">
-            <!-- Animated hearts can be added here -->
-        </div>
-        <div class="box" id="messageBox">
+        <div class="slide" id="slide1">
             <div class="star">✨</div>
-            <p id="message">It's Your Special Day, Nabila!</p>
+            <p>It's Your Special Day, Nabila!</p>
         </div>
-        <div class="buttons" id="buttons">
-            <button onclick="yesClicked()" id="yesButton">Yes!</button>
-            <button onclick="noClicked()" id="noButton">No</button>
+
+        <div class="slide hidden" id="slide2">
+            <p>To make something special for you, because you are special to me! ❤️</p>
         </div>
-        <canvas id="balloonsCanvas"></canvas>
+
+        <div class="slide hidden" id="slide3">
+            <p>Do you want to see what I made?</p>
+            <button onclick="showSlide('slide6')" id="yesButton">Yes!</button>
+            <button onclick="showSlide('slideNo')" id="noButton">No</button>
+        </div>
+
+        <div class="slide hidden" id="slideNo">
+            <p>Please watch it! 🙏</p>
+            <button onclick="showSlide('slide6')">OK</button>
+        </div>
+
+        <div class="slide hidden" id="slide6">
+            <p>Let's decorate for the celebration! 🎉</p>
+            <div class="floating-particles" id="particles"></div>
+            <canvas id="balloonsBottomCanvas"></canvas>
+            <button onclick="showSlide('slide7')">Next</button>
+        </div>
+
+        <div class="slide hidden" id="slide7">
+            <p>Click the balloons to release them! 🎈</p>
+            <canvas id="balloonsCanvas"></canvas>
+            <button onclick="releaseAllBalloons()">Release Balloons</button>
+        </div>
+
+        <div class="slide hidden" id="slide8">
+            <p>A special cake just for you! 🎂</p>
+            <div class="cake" id="cake">
+                <button onclick="splitCake()">Cut the Cake</button>
+            </div>
+        </div>
+
+        <div class="slide hidden" id="slide9">
+            <p id="finalMessage"></p>
+            <button onclick="restart()">Restart</button>
+        </div>
     </div>
 
     <script src="script.js"></script>

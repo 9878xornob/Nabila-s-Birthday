@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #fff, #fce4ec);
+    text-align: center;
+    padding: 50px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.slide {
+    display: none;
+    padding: 20px;
+    background: #ffe0b2;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.slide p {
+    font-size: 24px;
+    color: #d81b60;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    background: #d81b60;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+button:hover {
+    background: #880e4f;
+}
+
+.hidden {
+    display: none;
+}
+
+.balloons {
+    font-size: 50px;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+.cake {
+    font-size: 80px;
+    cursor: pointer;
+}

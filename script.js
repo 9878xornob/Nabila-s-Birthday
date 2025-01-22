@@ -1,4 +1,3 @@
-// Show a specific slide
 function showSlide(slideId) {
     document.querySelectorAll('.slide').forEach(slide => {
         slide.classList.add('hidden');
@@ -6,22 +5,23 @@ function showSlide(slideId) {
     document.getElementById(slideId).classList.remove('hidden');
 }
 
-// Handle the Yes button click
 function yesClicked() {
     showSlide('slideYes');
 }
 
-// Handle the No button click
 function noClicked() {
     showSlide('slideNo');
 }
 
-// Restart the sequence
-function restart() {
-    showSlide('slide1');
+function splitCake() {
+    const cake = document.getElementById('cake');
+    cake.style.transform = 'rotate(-30deg) translateX(50px)';
 }
 
-// Initialize by showing the first slide
+function restart() {
+    window.location.reload();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     showSlide('slide1');
 });

@@ -3,8 +3,10 @@ function nextSlide(answer) {
     document.getElementById('slide2').classList.add('hidden');
     document.getElementById('slide3').classList.add('hidden');
     document.getElementById('noSlide').classList.add('hidden');
-    
-    if (answer) {
+
+    if (answer === undefined) {
+        document.getElementById('slide2').classList.remove('hidden');
+    } else if (answer) {
         document.getElementById('slide3').classList.remove('hidden');
     } else {
         document.getElementById('noSlide').classList.remove('hidden');
@@ -23,3 +25,4 @@ function flyBalloons() {
 function splitCake() {
     document.querySelector('.cake').style.transform = 'translateX(-50px)';
 }
+

@@ -1,5 +1,3 @@
-// script.js
-
 // Event listeners for the buttons
 function yesClicked() {
     const messageBox = document.getElementById("messageBox");
@@ -56,7 +54,6 @@ function releaseBalloons() {
             ctx.fillStyle = balloon.color;
             ctx.fill();
 
-            // Remove balloons that move off-screen
             if (balloon.y + balloon.size < 0) {
                 balloons.splice(i, 1);
                 i--;

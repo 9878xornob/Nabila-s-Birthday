@@ -1,51 +1,28 @@
+<!-- HTML File -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special Day</title>
+    <title>Happy Birthday Nabila</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <!-- First Slide -->
-        <div id="slide1" class="slide">
-            <div class="box">
-                <p>It's your special day, Nabila!</p>
-                <div class="star">&#9733;</div>
-            </div>
-            <button onclick="nextSlide()">Next</button>
+    <div class="background">
+        <div class="heart-container">
+            <!-- Animated Hearts -->
         </div>
-
-        <!-- Second Slide -->
-        <div id="slide2" class="slide hidden">
-            <p>To make something special for you, you're special to me</p>
-            <p>Do you wanna see what I made?</p>
-            <button onclick="nextSlide(true)">Yes</button>
-            <button onclick="nextSlide(false)">No</button>
+        <div class="box" id="messageBox">
+            <div class="star">✨</div>
+            <p id="message">It's Your Special Day, Nabila!</p>
         </div>
-
-        <!-- Third Slide -->
-        <div id="slide3" class="slide hidden">
-            <p>Thank you!</p>
-            <p>Look, Nabila!</p>
-            <button onclick="showParty()">Click here ❤️</button>
+        <div class="buttons" id="buttons">
+            <button onclick="yesClicked()" id="yesButton">Yes!</button>
+            <button onclick="noClicked()" id="noButton">No</button>
         </div>
-
-        <!-- No Slide -->
-        <div id="noSlide" class="slide hidden">
-            <p>Please watch it</p>
-            <button onclick="nextSlide(true)">OK</button>
-        </div>
-
-        <!-- Party Slide -->
-        <div id="party" class="hidden">
-            <div class="balloons" onclick="flyBalloons()">🎈</div>
-            <div class="cake" onclick="splitCake()">🎂</div>
-            <p>Enjoy your day, Nabila!</p>
-        </div>
+        <canvas id="balloonsCanvas"></canvas>
     </div>
 
-    <script src="script.js" defer></script>
+    <script src="script.js"></script>
 </body>
 </html>
